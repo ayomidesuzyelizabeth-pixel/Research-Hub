@@ -1,0 +1,21 @@
+{
+  "name": "research-desk",
+  "version": "1.0.0",
+  "description": "Intelligent Research Workspace with Grounded Verification & Real Database Integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/run_all_tests.js"
+  },
+  "keywords": [
+    "research",
+    "citations",
+    "scholarly",
+    "crossref",
+    "openalex",
+    "supabase",
+    "verification"
+  ],
+  "author": "Team Faith (09060675905) & Ayomide (07048916400)",
+  "license": "MIT"
+}

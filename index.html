@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desk — Intelligent Research Workspace</title>
+  <meta name="description"
+    content="Desk is an intelligent research workspace for discovering, organizing, synthesizing, and reporting research sources with AI-assisted insights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- App Container Shell -->
+  <div id="app" class="app-layout">
+
+    <!-- Desktop Left Sidebar / Mobile Hidden -->
+    <aside id="desktop-sidebar" class="desktop-sidebar" aria-label="Desktop Navigation">
+      <div class="sidebar-brand">
+        <div class="brand-logo-wrap">
+          <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="10" fill="url(#teal-grad)" />
+            <path d="M9 10h14M9 16h10M9 22h14" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="teal-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#14b8a6" />
+                <stop offset="1" stop-color="#0d9488" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="brand-name">Desk</span>
+        </div>
+        <span class="brand-badge">PRO</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Primary Navigation">
+        <button type="button" class="nav-item active" data-tab="search" id="sidebar-tab-search"
+          aria-label="Search View">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="nav-label">Search</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="library" id="sidebar-tab-library" aria-label="Library View">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span class="nav-label">Library</span>
+          <span class="source-count-pill" id="library-count-badge">6</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="insights" id="sidebar-tab-insights" aria-label="Insights View">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z">
+            </path>
+            <path
+              d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z">
+            </path>
+          </svg>
+          <span class="nav-label">Insights</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="chat" id="sidebar-tab-chat" aria-label="Chat View">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="nav-label">Chat</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="notes" id="sidebar-tab-notes" aria-label="Notes View">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          <span class="nav-label">Notes</span>
+          <span class="indicator-dot"></span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer Info -->
+      <div class="sidebar-project-card">
+        <div class="project-card-header">
+          <span class="project-status-dot"></span>
+          <span class="project-scope-label">Active Workspace</span>
+        </div>
+        <p class="project-card-title">Urban Climate Dynamics</p>
+        <div class="project-stats-row">
+          <span>6 Sources</span>
+          <span>•</span>
+          <span>3 Synthesis</span>
+        </div>
+        <div class="sidebar-team-info">
+          <div class="sidebar-team-row">
+            <span class="team-tag">Team:</span>
+            <span class="team-person">Faith:</span>
+            <a href="tel:09060675905" class="team-phone-link">09060675905</a>
+          </div>
+          <div class="sidebar-team-row">
+            <span class="team-tag">Team:</span>
+            <span class="team-person">Ayomide:</span>
+            <a href="tel:07048916400" class="team-phone-link">07048916400</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Application Wrapper -->
+    <div class="app-main-wrapper">
+
+      <!-- Sticky Top Header -->
+      <header id="main-header" class="main-header" role="banner">
+        <div class="header-inner">
+          <!-- Left: Logo "Desk" in bold Teal -->
+          <div class="header-left">
+            <div class="header-logo" id="logo-trigger" role="button" tabindex="0" title="Desk Workspace">
+              <span class="logo-text">Desk</span>
+              <span class="logo-tag">Research</span>
+            </div>
+          </div>
+
+          <!-- Right: Project Selector & Theme Toggle -->
+          <div class="header-right">
+            <!-- Project Selector Dropdown Button -->
+            <div class="project-selector-wrapper">
+              <button type="button" class="project-pill-btn" id="project-selector-btn" aria-haspopup="true"
+                aria-expanded="false" title="Switch active project">
+                <span class="pill-dot"></span>
+                <span class="project-name" id="current-project-name">Urban Climate Dynamics</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div class="project-dropdown-menu" id="project-dropdown" role="menu">
+                <div class="dropdown-header">Projects</div>
+                <button type="button" class="dropdown-item active" role="menuitem"
+                  data-project="Urban Climate Dynamics">
+                  <span class="item-name">Urban Climate Dynamics</span>
+                  <span class="item-badge">6 sources</span>
+                </button>
+                <button type="button" class="dropdown-item" role="menuitem"
+                  data-project="Solid-State Electrolyte Battery Life">
+                  <span class="item-name">Solid-State Electrolyte Battery Life</span>
+                  <span class="item-badge">12 sources</span>
+                </button>
+                <button type="button" class="dropdown-item" role="menuitem"
+                  data-project="AI Alignment & Interpretability">
+                  <span class="item-name">AI Alignment & Interpretability</span>
+                  <span class="item-badge">4 sources</span>
+                </button>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="dropdown-action-btn" id="btn-create-project">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Create New Project</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Theme Toggle Button (Sun / Moon) -->
+            <button type="button" class="icon-btn theme-toggle-btn" id="theme-toggle"
+              aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+              <svg class="theme-icon sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="theme-icon moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area (Centered Column, max-width 800px or responsive desktop 2-col) -->
+      <main id="main-content" class="main-content-column" role="main">
+
+        <!-- ============================================== -->
+        <!-- VIEW 1: SEARCH VIEW (The Discovery Hub)       -->
+        <!-- ============================================== -->
+        <section id="view-search" class="tab-view active" aria-labelledby="search-heading">
+          <div class="view-header">
+            <h1 id="search-heading" class="view-title">Discovery Hub</h1>
+            <p class="view-subtitle">Search live web & peer-reviewed research databases to fuel your project.</p>
+          </div>
+
+          <!-- Top Search Section -->
+          <div class="search-box-card">
+            <div class="search-input-wrapper">
+              <svg class="search-input-icon" viewBox="0 0 24 24" width="22" height="22" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="search-input" class="search-input-field"
+                placeholder="Search research questions, papers, or empirical topics..."
+                value="urban heat island mitigation strategies albedo vegetation" autocomplete="off" />
+              <button type="button" class="search-clear-btn" id="search-clear-btn" title="Clear search">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <button type="button" class="search-action-btn" id="search-submit-btn">Search</button>
+            </div>
+
+            <!-- Academic Sources Only Toggle -->
+            <div class="search-filters-row">
+              <label class="toggle-switch-label" for="academic-only-toggle">
+                <span class="toggle-switch">
+                  <input type="checkbox" id="academic-only-toggle" checked>
+                  <span class="slider"></span>
+                </span>
+                <span class="toggle-text">Academic Sources Only</span>
+              </label>
+
+              <div class="quick-tags-wrap">
+                <span class="quick-tag-label">Try:</span>
+                <button type="button" class="quick-filter-tag"
+                  data-query="urban heat island mitigation strategies albedo vegetation">Urban Heat</button>
+                <button type="button" class="quick-filter-tag"
+                  data-query="microclimate modeling green roofs vs cool pavements">Green Roofs</button>
+                <button type="button" class="quick-filter-tag"
+                  data-query="pedestrian thermal comfort mean radiant temperature">Thermal Comfort</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State (Shown when search input is empty) -->
+          <div id="search-empty-state" class="empty-state-container hidden">
+            <div class="telescope-illustration-wrapper">
+              <svg class="telescope-svg" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stars / Sky -->
+                <circle cx="40" cy="30" r="1.5" fill="var(--teal-500)" opacity="0.6" />
+                <circle cx="95" cy="20" r="2" fill="var(--teal-500)" opacity="0.8" />
+                <circle cx="180" cy="35" r="1.5" fill="var(--text-muted)" opacity="0.5" />
+                <circle cx="210" cy="70" r="2" fill="var(--teal-500)" opacity="0.4" />
+                <path d="M125 12L127 18L133 20L127 22L125 28L123 22L117 20L123 18Z" fill="var(--teal-500)"
+                  opacity="0.75" />
+                <!-- Tripod Base -->
+                <line x1="120" y1="120" x2="70" y2="170" stroke="var(--border-color)" stroke-width="4"
+                  stroke-linecap="round" />
+                <line x1="120" y1="120" x2="120" y2="175" stroke="var(--border-color)" stroke-width="4"
+                  stroke-linecap="round" />
+                <line x1="120" y1="120" x2="170" y2="170" stroke="var(--border-color)" stroke-width="4"
+                  stroke-linecap="round" />
+                <circle cx="120" cy="120" r="7" fill="var(--teal-500)" />
+                <!-- Mount & Angle -->
+                <path d="M110 115L120 102L130 115Z" fill="var(--text-secondary)" />
+                <!-- Telescope Barrel -->
+                <g transform="rotate(-32 120 100)">
+                  <!-- Main tube -->
+                  <rect x="70" y="90" width="105" height="20" rx="4" fill="var(--bg-card)" stroke="var(--teal-500)"
+                    stroke-width="2.5" />
+                  <!-- Lens hood -->
+                  <rect x="175" y="86" width="18" height="28" rx="3" fill="var(--teal-500)" />
+                  <ellipse cx="193" cy="100" rx="4" ry="14" fill="#5eead4" />
+                  <!-- Eyepiece & Focus Knobs -->
+                  <rect x="52" y="93" width="18" height="14" rx="2" fill="var(--text-secondary)" />
+                  <rect x="42" y="96" width="10" height="8" rx="2" fill="var(--teal-600)" />
+                  <circle cx="95" cy="86" r="4" fill="var(--teal-500)" />
+                </g>
+                <!-- Ground shadow -->
+                <ellipse cx="120" cy="172" rx="60" ry="5" fill="var(--border-color)" opacity="0.3" />
+              </svg>
+            </div>
+            <h3 class="empty-state-title">Search the web to start your project.</h3>
+            <p class="empty-state-desc">Enter any scientific query, keyword, or hypothesis above to retrieve indexed
+              papers and evidence.</p>
+          </div>
+
+          <!-- Results Feed -->
+          <div id="search-results-feed" class="results-feed">
+            <div class="results-status-bar">
+              <span class="results-count-text">Showing <strong>4</strong> highly cited peer-reviewed articles</span>
+              <span class="results-sort-label">Sorted by relevance</span>
+            </div>
+
+            <!-- Card 1 -->
+            <article class="result-card">
+              <header class="result-card-header">
+                <a href="https://doi.org/10.1038/s41558-024-02100-z" target="_blank" rel="noopener noreferrer"
+                  class="result-title">
+                  Quantifying Microclimate Cooling of Urban Canopies Under Extreme Heat Waves
+                </a>
+                <time class="result-date" datetime="2026-08-14">Aug 14, 2026</time>
+              </header>
+              <div class="result-card-body">
+                <p class="result-summary">
+                  Empirical field measurements across 14 metropolitan zones indicate mature tree canopies deliver a
+                  2.4°C daytime ambient temperature reduction via combined shading and evapotranspiration. High canopy
+                  density consistently outperformed reflective surface interventions during peak solar noon hours.
+                </p>
+              </div>
+              <footer class="result-card-footer">
+                <div class="result-meta">
+                  <span class="source-url-tag">nature.com/articles/s41558-024-02100-z</span>
+                  <span class="peer-reviewed-tag">Peer Reviewed</span>
+                </div>
+                <button type="button" class="btn-save-library saved" data-source-id="S1">
+                  <svg class="save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Saved in Library</span>
+                </button>
+              </footer>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="result-card">
+              <header class="result-card-header">
+                <a href="https://doi.org/10.1016/j.buildenv.2025.111822" target="_blank" rel="noopener noreferrer"
+                  class="result-title">
+                  Unintended Radiative Forcing and Pedestrian Thermal Stress from Super-Reflective Pavements
+                </a>
+                <time class="result-date" datetime="2025-11-02">Nov 02, 2025</time>
+              </header>
+              <div class="result-card-body">
+                <p class="result-summary">
+                  While high-albedo pavements lower surface temperature by up to 14°C, they redirect shortwave radiation
+                  upward, increasing pedestrian Mean Radiant Temperature (MRT) by +3.2°C. The study urges caution
+                  against widespread cool pavement adoption in narrow street canyons lacking overhead shade.
+                </p>
+              </div>
+              <footer class="result-card-footer">
+                <div class="result-meta">
+                  <span class="source-url-tag">sciencedirect.com/science/article/pii/S0360132325011822</span>
+                  <span class="peer-reviewed-tag">Peer Reviewed</span>
+                </div>
+                <button type="button" class="btn-save-library saved" data-source-id="S2">
+                  <svg class="save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Saved in Library</span>
+                </button>
+              </footer>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="result-card">
+              <header class="result-card-header">
+                <a href="https://doi.org/10.1029/2026GL108221" target="_blank" rel="noopener noreferrer"
+                  class="result-title">
+                  City-Scale Albedo Modification and Regional Cloud Precipitation Interactions
+                </a>
+                <time class="result-date" datetime="2026-03-29">Mar 29, 2026</time>
+              </header>
+              <div class="result-card-body">
+                <p class="result-summary">
+                  Atmospheric boundary layer simulations demonstrate large-scale cool roof installations alter vertical
+                  thermal updrafts, suppressing localized convective cloud formation over arid urban corridors. The
+                  findings demonstrate complex regional feedback loops beyond localized cooling.
+                </p>
+              </div>
+              <footer class="result-card-footer">
+                <div class="result-meta">
+                  <span class="source-url-tag">agu.org/doi/10.1029/2026GL108221</span>
+                  <span class="peer-reviewed-tag">Peer Reviewed</span>
+                </div>
+                <button type="button" class="btn-save-library saved" data-source-id="S3">
+                  <svg class="save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Saved in Library</span>
+                </button>
+              </footer>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="result-card">
+              <header class="result-card-header">
+                <a href="https://doi.org/10.1088/1748-9326/ad29ef" target="_blank" rel="noopener noreferrer"
+                  class="result-title">
+                  Thermal Comfort Optimization via Integrated Shading and Retroreflective Coatings
+                </a>
+                <time class="result-date" datetime="2025-06-18">Jun 18, 2025</time>
+              </header>
+              <div class="result-card-body">
+                <p class="result-summary">
+                  Retroreflective materials selectively reflect sunlight back along the incident solar vector rather
+                  than diffusely toward street-level pedestrians. When combined with permeable vegetation, urban
+                  microclimates achieved net universal thermal climate index (UTCI) improvements.
+                </p>
+              </div>
+              <footer class="result-card-footer">
+                <div class="result-meta">
+                  <span class="source-url-tag">iopscience.iop.org/article/10.1088/1748-9326/ad29ef</span>
+                  <span class="peer-reviewed-tag">Peer Reviewed</span>
+                </div>
+                <button type="button" class="btn-save-library saved" data-source-id="S4">
+                  <svg class="save-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Saved in Library</span>
+                </button>
+              </footer>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 2: LIBRARY VIEW (The Evidence Vault)     -->
+        <!-- ============================================== -->
+        <section id="view-library" class="tab-view" aria-labelledby="library-heading">
+          <div class="view-header">
+            <h1 id="library-heading" class="view-title">Evidence Vault</h1>
+            <p class="view-subtitle">Curate, inspect, and organize all primary sources referenced in this project.</p>
+          </div>
+
+          <!-- Add Source Collapsible Area -->
+          <div class="add-source-container">
+            <button type="button" class="add-source-trigger-btn" id="add-source-trigger" aria-expanded="false">
+              <div class="trigger-left">
+                <span class="plus-icon-pill">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+                <span class="trigger-text">Add New Source to Vault</span>
+              </div>
+              <svg class="trigger-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <!-- Collapsed Form Menu with Interactive Tabs -->
+            <div class="add-source-panel hidden" id="add-source-panel">
+              <!-- Add Mode Switcher Tabs -->
+              <div class="add-tabs-bar">
+                <button type="button" class="add-mode-tab active" data-mode="paste">Paste Text</button>
+                <button type="button" class="add-mode-tab" data-mode="doi">Add by DOI</button>
+                <button type="button" class="add-mode-tab" data-mode="link">Add by Link</button>
+                <button type="button" class="add-mode-tab" data-mode="file">Upload Document</button>
+              </div>
+
+              <!-- Mode 1: Paste Text -->
+              <form id="form-add-source" class="add-source-form add-form-section" data-section="paste"
+                onsubmit="return false;">
+                <div class="form-group">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <label for="input-source-title" class="form-label" style="margin-bottom: 0;">Source Title <span
+                        class="required">*</span></label>
+                    <button type="button" class="btn-sample-fill" id="btn-sample-paste"
+                      title="Insert realistic empirical abstract">📋 Fill Sample Abstract</button>
+                  </div>
+                  <input type="text" id="input-source-title" class="form-input"
+                    placeholder="e.g. Empirical Assessment of Albedo Degradation in Monsoon Climates" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-source-url" class="form-label">Source URL / DOI</label>
+                  <input type="url" id="input-source-url" class="form-input"
+                    placeholder="https://doi.org/... or https://...">
+                </div>
+
+                <div class="form-group">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <label for="input-source-text" class="form-label" style="margin-bottom: 0;">Pasted Text / Abstract /
+                      Notes <span class="required">*</span></label>
+                    <span id="paste-word-count" style="font-size: 0.78rem; color: var(--text-muted);">0 words</span>
+                  </div>
+                  <textarea id="input-source-text" class="form-textarea" rows="4"
+                    placeholder="Paste full article text, abstract, excerpt, or observational notes..."
+                    required></textarea>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="button" class="btn-secondary btn-cancel-source">Cancel</button>
+                  <button type="submit" class="btn-primary" id="btn-submit-source">
+                    <span>Save to Vault</span>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Mode 2: Add by DOI (Crossref Live) -->
+              <form id="form-add-doi" class="add-source-form add-form-section hidden" data-section="doi"
+                onsubmit="return false;">
+                <div class="form-group">
+                  <label for="input-doi-field" class="form-label">Digital Object Identifier (DOI) <span
+                      class="required">*</span></label>
+                  <div class="input-with-button">
+                    <input type="text" id="input-doi-field" class="form-input"
+                      placeholder="e.g. 10.1016/j.uclim.2020.100714 or https://doi.org/..." required>
+                    <button type="submit" class="btn-primary" id="btn-resolve-doi">
+                      <span>Fetch from Crossref</span>
+                    </button>
+                  </div>
+                  <div class="sample-pills-row">
+                    <span class="sample-label">Try sample DOIs:</span>
+                    <button type="button" class="sample-pill-btn"
+                      data-doi="10.1016/j.uclim.2020.100714">10.1016/j.uclim.2020.100714 (Urban Climate)</button>
+                    <button type="button" class="sample-pill-btn"
+                      data-doi="10.1016/j.buildenv.2025.111822">10.1016/j.buildenv.2025.111822 (Cool Pavement)</button>
+                    <button type="button" class="sample-pill-btn" data-doi="10.1029/2026GL108221">10.1029/2026GL108221
+                      (Atmospheric WRF)</button>
+                  </div>
+                  <span class="field-hint">Validated against official Crossref & OpenAlex academic registries.</span>
+                </div>
+                <div id="doi-preview-card" class="resolved-source-preview hidden"></div>
+              </form>
+
+              <!-- Mode 3: Add by Link (URL Importer with Paywall Detection) -->
+              <form id="form-add-link" class="add-source-form add-form-section hidden" data-section="link"
+                onsubmit="return false;">
+                <div class="form-group">
+                  <label for="input-link-field" class="form-label">Article Web URL <span
+                      class="required">*</span></label>
+                  <div class="input-with-button">
+                    <input type="url" id="input-link-field" class="form-input"
+                      placeholder="https://nature.com/articles/... or https://..." required>
+                    <button type="submit" class="btn-primary" id="btn-fetch-link">
+                      <span>Fetch & Extract</span>
+                    </button>
+                  </div>
+                  <div class="sample-pills-row">
+                    <span class="sample-label">Try sample URLs:</span>
+                    <button type="button" class="sample-pill-btn" data-url="https://example.com">https://example.com
+                      (Open Access)</button>
+                    <button type="button" class="sample-pill-btn"
+                      data-url="https://arxiv.org/abs/2301.07041">arXiv:2301.07041 (Paper)</button>
+                  </div>
+                  <span class="field-hint">Checks robots.txt, strips boilerplate, and detects paywall gateways
+                    automatically.</span>
+                </div>
+                <div id="link-preview-card" class="resolved-source-preview hidden"></div>
+              </form>
+
+              <!-- Mode 4: File Upload -->
+              <div id="section-file-upload" class="add-form-section hidden" data-section="file">
+                <div class="file-dropzone" id="file-dropzone">
+                  <input type="file" id="file-input" class="file-input-hidden" accept=".pdf,.docx,.txt,.md">
+                  <svg class="dropzone-icon" viewBox="0 0 24 24" width="32" height="32" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <p class="dropzone-title">Drag & drop research papers or click to browse</p>
+                  <span class="dropzone-hint">Supports PDF, DOCX, TXT, MD (up to 25MB)</span>
+                  <div id="dropzone-file-preview" class="file-preview-pill hidden">
+                    <span id="dropzone-file-name">filename.pdf</span>
+                    <button type="button" id="btn-remove-file" title="Remove file">&times;</button>
+                  </div>
+                </div>
+                <div class="sample-pills-row" style="margin-top: 10px;">
+                  <button type="button" class="sample-pill-btn" id="btn-load-sample-file">📂 Load Sample Manuscript:
+                    "Microclimate_Urban_Cooling.md"</button>
+                </div>
+                <div class="form-actions-row" style="margin-top: 14px;">
+                  <button type="button" class="btn-secondary btn-cancel-source">Cancel</button>
+                  <button type="button" class="btn-primary" id="btn-upload-file-save">
+                    <span>Extract & Save to Vault</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Source List Container (Desktop two-column layout friendly) -->
+          <div class="library-two-column-layout">
+            <!-- Left: Source List -->
+            <div class="sources-list-column">
+              <div class="source-list-header">
+                <span class="source-list-title">Indexed Sources (<span id="source-total-count">6</span>)</span>
+                <span class="source-list-instruction">Click any item to view full text in drawer</span>
+              </div>
+
+              <!-- Vault Real-Time Search & Type Filter Bar -->
+              <div class="vault-filter-bar">
+                <div class="vault-search-box">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <input type="text" id="vault-search-input" class="vault-search-input"
+                    placeholder="Filter vault sources by title, author, or claim...">
+                  <button type="button" id="vault-clear-search" class="vault-clear-btn hidden"
+                    title="Clear filter">&times;</button>
+                </div>
+                <div class="vault-filter-chips">
+                  <button type="button" class="vault-filter-chip active" data-type="all">All (<span
+                      id="vault-count-badge">6</span>)</button>
+                  <button type="button" class="vault-filter-chip" data-type="scholarly">Scholarly</button>
+                  <button type="button" class="vault-filter-chip" data-type="manual">Manual</button>
+                  <button type="button" class="vault-filter-chip" data-type="uploaded">Uploaded</button>
+                </div>
+              </div>
+
+              <div id="sources-container" class="sources-list">
+                <!-- Sources rendered dynamically via app.js -->
+              </div>
+            </div>
+
+            <!-- Right: Desktop Side Preview Area (Visible on Desktop >= 1200px) -->
+            <div id="desktop-source-preview-area" class="desktop-preview-container">
+              <div class="desktop-preview-placeholder">
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--teal-500)" stroke-width="1.5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <h3>Select a source to preview</h3>
+                <p>Click any item on the left to inspect full extracts, extracted claims, and citations.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 3: INSIGHTS VIEW (The Synthesis Engine)  -->
+        <!-- ============================================== -->
+        <section id="view-insights" class="tab-view" aria-labelledby="insights-heading">
+          <div class="view-header">
+            <h1 id="insights-heading" class="view-title">Synthesis Engine</h1>
+            <p class="view-subtitle">Automated cross-document synthesis, conflict identification, and literature gap
+              detection.</p>
+          </div>
+
+          <!-- Empty / Trigger State (Shown when analysis is cleared or requested) -->
+          <div id="insights-trigger-state" class="insights-trigger-box hidden">
+            <div class="brain-icon-pulse-wrapper">
+              <svg class="brain-svg" viewBox="0 0 24 24" width="56" height="56" fill="none"
+                stroke="url(#teal-grad-brain)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <defs>
+                  <linearGradient id="teal-grad-brain" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#14b8a6" />
+                    <stop offset="1" stop-color="#2dd4bf" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z">
+                </path>
+                <path
+                  d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="trigger-title">Cross-Source Intelligence Ready</h2>
+            <p class="trigger-desc">Synthesize all 6 evidence documents to extract structural patterns, detect empirical
+              contradictions, and surface missing literature gaps.</p>
+            <button type="button" class="btn-primary btn-generate-insights" id="btn-trigger-insights">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <span>Generate Insights</span>
+            </button>
+          </div>
+
+          <!-- Active Synthesis Content Container -->
+          <div id="insights-content-container" class="insights-content-wrapper">
+
+            <!-- Summary Box: Full-width, light-teal tinted box with 3-sentence synthesis -->
+            <div class="insights-summary-box">
+              <div class="summary-box-header">
+                <div class="summary-badge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Executive AI Synthesis</span>
+                </div>
+                <button type="button" class="btn-text-reanalyze" id="btn-reanalyze">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                  <span>Re-analyze</span>
+                </button>
+              </div>
+              <p class="summary-text" id="summary-synthesis-text">
+                Urban heat island mitigation requires balancing localized surface albedo with pedestrian mean radiant
+                temperature, as demonstrated across empirical field measurements and microclimatic simulations. While
+                urban tree canopies consistently lower ambient temperatures by 2.4°C without detrimental radiation
+                scatter, super-reflective pavements inadvertently elevate human thermal discomfort in narrow street
+                corridors. Consequently, successful mitigation policy necessitates retroreflective coatings paired with
+                contiguous vegetative shade rather than isolated high-albedo paving.
+              </p>
+            </div>
+
+            <!-- Insights Category Filter Bar -->
+            <div class="insights-filter-tabs">
+              <button type="button" class="insights-filter-tab active" data-category="all">All Evidence (4
+                Findings)</button>
+              <button type="button" class="insights-filter-tab" data-category="pattern">Patterns (Consensus)</button>
+              <button type="button" class="insights-filter-tab" data-category="conflict">Conflicts
+                (Disagreement)</button>
+              <button type="button" class="insights-filter-tab" data-category="gap">Gaps (Missing Literature)</button>
+            </div>
+
+            <!-- Key Points Section with citations in brackets -->
+            <div class="insights-section">
+              <h2 class="section-title">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--teal-500)" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                <span>Synthesized Key Findings</span>
+              </h2>
+
+              <ul class="key-points-list">
+                <li class="key-point-item">
+                  <span class="point-bullet"></span>
+                  <div class="point-content">
+                    The urban heat island effect is intensifying across dense metropolitan corridors, generating
+                    nocturnal temperature anomalies exceeding 4.1°C
+                    <span class="citation-group">
+                      <button type="button" class="citation-tag" data-source-id="S1"
+                        title="View Source S1">[S1]</button>
+                      <button type="button" class="citation-tag" data-source-id="S4"
+                        title="View Source S4">[S4]</button>
+                      <button type="button" class="citation-tag" data-source-id="S6"
+                        title="View Source S6">[S6]</button>
+                    </span>.
+                  </div>
+                </li>
+
+                <li class="key-point-item">
+                  <span class="point-bullet"></span>
+                  <div class="point-content">
+                    Mature tree canopies and continuous vegetation corridors reliably produce 1.8°C to 2.4°C daytime
+                    ambient temperature depression via coupled evapotranspiration and solar interception
+                    <span class="citation-group">
+                      <button type="button" class="citation-tag" data-source-id="S1"
+                        title="View Source S1">[S1]</button>
+                      <button type="button" class="citation-tag" data-source-id="S5"
+                        title="View Source S5">[S5]</button>
+                    </span>.
+                  </div>
+                </li>
+
+                <li class="key-point-item">
+                  <span class="point-bullet"></span>
+                  <div class="point-content">
+                    Super-reflective pavements achieve dramatic surface cooling (-14°C) but cause diffuse upward
+                    shortwave flux that increases pedestrian thermal stress unless sheltered
+                    <span class="citation-group">
+                      <button type="button" class="citation-tag" data-source-id="S2"
+                        title="View Source S2">[S2]</button>
+                      <button type="button" class="citation-tag" data-source-id="S3"
+                        title="View Source S3">[S3]</button>
+                    </span>.
+                  </div>
+                </li>
+
+                <li class="key-point-item">
+                  <span class="point-bullet"></span>
+                  <div class="point-content">
+                    Directional retroreflective surfaces reflect incoming solar rays back upward toward the sky dome,
+                    effectively decoupling surface cooling from pedestrian exposure
+                    <span class="citation-group">
+                      <button type="button" class="citation-tag" data-source-id="S4"
+                        title="View Source S4">[S4]</button>
+                    </span>.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Visuals Grid: Theme Chart & Pattern / Conflict / Gap Cards -->
+            <div class="insights-visuals-grid">
+
+              <!-- Theme Chart (Horizontal Bar Chart) -->
+              <div class="chart-card">
+                <div class="chart-card-header">
+                  <h3 class="chart-card-title">Prevalent Thematic Frequencies</h3>
+                  <span class="chart-subtitle">Distribution across 6 indexed papers</span>
+                </div>
+                <div class="horizontal-bar-chart">
+                  <div class="chart-row">
+                    <div class="chart-label-row">
+                      <span class="chart-label">Vegetation Canopy & Evapotranspiration</span>
+                      <span class="chart-value">88%</span>
+                    </div>
+                    <div class="chart-track">
+                      <div class="chart-fill" style="width: 88%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="chart-row">
+                    <div class="chart-label-row">
+                      <span class="chart-label">Surface Albedo & Pavement Reflection</span>
+                      <span class="chart-value">75%</span>
+                    </div>
+                    <div class="chart-track">
+                      <div class="chart-fill" style="width: 75%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="chart-row">
+                    <div class="chart-label-row">
+                      <span class="chart-label">Pedestrian Mean Radiant Temperature (MRT)</span>
+                      <span class="chart-value">62%</span>
+                    </div>
+                    <div class="chart-track">
+                      <div class="chart-fill" style="width: 62%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="chart-row">
+                    <div class="chart-label-row">
+                      <span class="chart-label">Regional Atmospheric Boundary Dynamics</span>
+                      <span class="chart-value">45%</span>
+                    </div>
+                    <div class="chart-track">
+                      <div class="chart-fill" style="width: 45%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pattern, Conflict, Gap Distinct Colored Cards -->
+              <div class="synthesis-cards-column">
+
+                <!-- Patterns (Teal) -->
+                <div class="analysis-card card-pattern">
+                  <div class="analysis-card-header">
+                    <span class="badge-status badge-teal">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                      </svg>
+                      <span>Pattern (Consensus)</span>
+                    </span>
+                    <span class="sources-ref">[S1, S3, S5]</span>
+                  </div>
+                  <h4 class="analysis-card-title">Canopy Density Linearly Correlates with Peak Cooling</h4>
+                  <p class="analysis-card-text">
+                    All three field empirical studies confirm that canopy cover exceeding 40% along vehicular corridors
+                    yields a predictable 2.0°C to 2.4°C decrease in ambient air temperature during peak solar
+                    insolation.
+                  </p>
+                </div>
+
+                <!-- Conflicts (Red) -->
+                <div class="analysis-card card-conflict">
+                  <div class="analysis-card-header">
+                    <span class="badge-status badge-red">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                      <span>Conflict (Disagreement)</span>
+                    </span>
+                    <span class="sources-ref">[S2 vs S4]</span>
+                  </div>
+                  <h4 class="analysis-card-title">Pavement Reflectance Impact on Human Thermal Index</h4>
+                  <p class="analysis-card-text">
+                    Source <button type="button" class="inline-citation-link" data-source-id="S2">[S2]</button> asserts
+                    that reflective pavements exacerbate pedestrian heat distress by +3.2°C MRT in street canyons,
+                    whereas Source <button type="button" class="inline-citation-link" data-source-id="S4">[S4]</button>
+                    argues that retroreflective coatings maintain net thermal comfort when paired with perimeter tree
+                    shading.
+                  </p>
+                  <button type="button" class="btn-conflict-action" id="btn-open-conflict-modal">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 3h5v5"></path>
+                      <path d="M4 20L21 3"></path>
+                      <path d="M21 16v5h-5"></path>
+                      <path d="M15 15l6 6"></path>
+                      <path d="M4 4l5 5"></path>
+                    </svg>
+                    <span>Compare S2 vs S4 Side-by-Side</span>
+                  </button>
+                </div>
+
+                <!-- Gaps (Amber) -->
+                <div class="analysis-card card-gap">
+                  <div class="analysis-card-header">
+                    <span class="badge-status badge-amber">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                      </svg>
+                      <span>Gap (Missing Literature)</span>
+                    </span>
+                    <span class="sources-ref">[All Sources S1–S6]</span>
+                  </div>
+                  <h4 class="analysis-card-title">Absence of Multi-Year Albedo Degradation & Lifecycle Costs</h4>
+                  <p class="analysis-card-text">
+                    The sources do not mention particulate soiling, vehicular tire abrasion, or multi-year maintenance
+                    costs in tropical and humid monsoon regions, which is strictly required for policy-level capital
+                    expenditure conclusions.
+                  </p>
+                  <button type="button" class="btn-gap-action" id="btn-explore-gap"
+                    data-gap-query="albedo degradation tire abrasion monsoon particulate maintenance">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span>Search Discovery Hub for this Literature Gap ↗</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Disclaimer -->
+            <footer class="insights-footer">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span class="disclaimer-text">AI-generated analysis. Please verify against originals.</span>
+            </footer>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 4: CHAT VIEW (Ask Your Sources)          -->
+        <!-- ============================================== -->
+        <section id="view-chat" class="tab-view" aria-labelledby="chat-heading">
+          <div class="view-header">
+            <h1 id="chat-heading" class="view-title">Ask Your Sources</h1>
+            <p class="view-subtitle">Converse directly with indexed evidence. All responses feature ground-truth
+              citations.</p>
+          </div>
+
+          <!-- Suggested Prompt Chips -->
+          <div class="chat-chips-scroll">
+            <button type="button" class="chat-prompt-chip"
+              data-prompt="What are the specific contradictions between Source S2 and Source S4 regarding pedestrian heat?">
+              Contradictions between S2 & S4?
+            </button>
+            <button type="button" class="chat-prompt-chip"
+              data-prompt="Summarize the quantitative cooling effect of mature tree canopies.">
+              Tree canopy cooling metrics
+            </button>
+            <button type="button" class="chat-prompt-chip"
+              data-prompt="What evidence exists regarding retroreflective coatings vs diffuse albedo?">
+              Retroreflective vs diffuse albedo
+            </button>
+          </div>
+
+          <!-- Chat Conversation Log -->
+          <div class="chat-messages-container" id="chat-messages">
+
+            <!-- AI Welcome Message -->
+            <div class="chat-message-row ai-message">
+              <div class="message-avatar">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#14b8a6" stroke-width="2">
+                  <path
+                    d="M12 2a8 8 0 0 0-8 8c0 3.36 2.08 6.23 5 7.42V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.58c2.92-1.19 5-4.06 5-7.42a8 8 0 0 0-8-8z">
+                  </path>
+                </svg>
+              </div>
+              <div class="message-bubble">
+                <div class="bubble-header">
+                  <span class="sender-name">Desk Synthesis Assistant</span>
+                  <time class="message-time">13:40</time>
+                </div>
+                <div class="bubble-body">
+                  <p>
+                    I have indexed <strong>6 primary sources</strong> from your Evidence Vault. Ask me any synthesis
+                    question, request comparative tables, or probe for evidence contradictions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- User Query 1 -->
+            <div class="chat-message-row user-message">
+              <div class="message-bubble">
+                <div class="bubble-header">
+                  <span class="sender-name">You</span>
+                  <time class="message-time">13:41</time>
+                </div>
+                <div class="bubble-body">
+                  <p>Can cool pavements actually make pedestrians hotter during daytime hours?</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Response 1 -->
+            <div class="chat-message-row ai-message">
+              <div class="message-avatar">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#14b8a6" stroke-width="2">
+                  <path
+                    d="M12 2a8 8 0 0 0-8 8c0 3.36 2.08 6.23 5 7.42V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.58c2.92-1.19 5-4.06 5-7.42a8 8 0 0 0-8-8z">
+                  </path>
+                </svg>
+              </div>
+              <div class="message-bubble">
+                <div class="bubble-header">
+                  <span class="sender-name">Desk Synthesis Assistant</span>
+                  <time class="message-time">13:41</time>
+                </div>
+                <div class="bubble-body">
+                  <p>
+                    <strong>Yes, under specific geometric conditions.</strong> While conventional high-albedo pavements
+                    reduce surface temperature by 12°C–14°C, they redirect shortwave solar flux upward into the human
+                    posture envelope <button type="button" class="chat-cite-pill" data-source-id="S2">[S2]</button>.
+                  </p>
+                  <p>
+                    In street canyons with high building aspect ratios, this reflected radiation increases pedestrian
+                    Mean Radiant Temperature (MRT) by <strong>+3.2°C</strong>, worsening physiological thermal strain
+                    unless overhead canopy cover or retroreflective directional surfaces are applied <button
+                      type="button" class="chat-cite-pill" data-source-id="S4">[S4]</button>.
+                  </p>
+                </div>
+                <div class="bubble-footer">
+                  <span class="citation-hint">Click citation tags [S#] to inspect evidence in the vault.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom-Fixed Chat Input Container -->
+          <div class="chat-input-bar">
+            <form id="chat-form" class="chat-input-form" onsubmit="return false;">
+              <textarea id="chat-textarea" class="chat-textarea" rows="1"
+                placeholder="Ask about contradictions, mechanisms, or synthesis across S1-S6..."
+                aria-label="Ask your sources"></textarea>
+              <button type="submit" class="btn-send-chat" id="btn-send-chat" title="Send Question"
+                aria-label="Send Question">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 5: NOTES VIEW (The Final Report)         -->
+        <!-- ============================================== -->
+        <section id="view-notes" class="tab-view" aria-labelledby="notes-heading">
+          <div class="view-header notes-header-row">
+            <div>
+              <h1 id="notes-heading" class="view-title">Final Synthesis Report</h1>
+              <p class="view-subtitle">Draft your peer-ready synthesis document with embedded bracketed citations.</p>
+            </div>
+
+            <!-- Header Action Controls: Auto-save pulse & Export Button -->
+            <div class="notes-header-actions">
+              <!-- Auto-save tiny pulsing indicator -->
+              <div class="autosave-status" id="autosave-indicator" title="Auto-save status">
+                <span class="autosave-pulse-dot"></span>
+                <span class="autosave-label" id="autosave-label">Saved</span>
+              </div>
+
+              <!-- Export Button with Dropdown -->
+              <div class="export-dropdown-wrapper">
+                <button type="button" class="btn-primary btn-export-report" id="btn-export-dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>Export Report</span>
+                  <svg class="chevron-mini" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                <div class="export-dropdown-menu" id="export-menu" role="menu">
+                  <button type="button" class="export-menu-item" id="btn-export-md" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <div class="export-item-text">
+                      <span class="export-item-title">Download as Markdown</span>
+                      <span class="export-item-ext">.md format with frontmatter</span>
+                    </div>
+                  </button>
+
+                  <button type="button" class="export-menu-item" id="btn-export-pdf" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M6 9V2h12v7"></path>
+                      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                      <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    <div class="export-item-text">
+                      <span class="export-item-title">Print / Export to PDF</span>
+                      <span class="export-item-ext">Print-ready publication layout</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes Editor Card -->
+          <div class="notes-editor-card">
+            <!-- Toolbar -->
+            <div class="editor-toolbar">
+              <div class="toolbar-group">
+                <button type="button" class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)">
+                  <strong>B</strong>
+                </button>
+                <button type="button" class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)">
+                  <em>I</em>
+                </button>
+                <button type="button" class="toolbar-btn" data-action="h2" title="Heading 2">
+                  H2
+                </button>
+                <button type="button" class="toolbar-btn" data-action="h3" title="Heading 3">
+                  H3
+                </button>
+                <button type="button" class="toolbar-btn" data-action="bullet" title="Bullet List">
+                  • List
+                </button>
+              </div>
+
+              <div class="toolbar-divider"></div>
+
+              <div class="toolbar-group">
+                <button type="button" class="toolbar-btn citation-inserter" id="btn-insert-citation"
+                  title="Insert Source Citation">
+                  <span class="cite-badge-icon">[S]</span>
+                  <span>Insert Citation</span>
+                </button>
+              </div>
+
+              <div class="toolbar-spacer"></div>
+
+              <div class="toolbar-group mode-toggle-group">
+                <button type="button" class="toolbar-tab-btn active" id="tab-editor-write">Write</button>
+                <button type="button" class="toolbar-tab-btn" id="tab-editor-preview">Preview</button>
+              </div>
+            </div>
+
+            <!-- Distraction-free full-screen capable text area -->
+            <div class="editor-body-wrapper">
+              <textarea id="notes-textarea" class="notes-textarea" spellcheck="true"
+                placeholder="# Research Synthesis Report..."># Comparative Analysis of Urban Heat Island Mitigation Strategies
+
+## Executive Summary
+Urban heat island (UHI) mitigation has evolved from simple high-albedo roof replacements into a nuanced, multi-faceted discipline balancing surface cooling with human physiological comfort. Recent empirical field trials [S1, S5] confirm that vegetative canopy cover exceeding 40% delivers a steady 2.0°C–2.4°C daytime ambient temperature depression through combined solar interception and evapotranspiration.
+
+## The Albedo Conundrum & Pedestrian Thermal Stress
+While super-reflective cool pavements achieve surface temperature reductions of up to 14°C [S2], they induce unintended secondary consequences in enclosed urban street canyons. Because incoming shortwave radiation is diffusely scattered horizontally and upward, pedestrian Mean Radiant Temperature (MRT) spikes by +3.2°C [S2]. 
+
+In contrast, retroreflective directional materials selectively reflect radiation along the incident solar vector back toward the sky dome [S4], neutralizing downward thermal strain on pedestrians.
+
+## Synthesis & Policy Recommendations
+1. **Prioritize Canopy Cover over Isolated Paving:** Green vegetative shade consistently outperforms inert materials during peak heat wave scenarios [S1, S5].
+2. **Restrict Diffuse Cool Pavement to Open Esposures:** Super-reflective materials should be restricted to wide highways and airport runways where pedestrian foot traffic is negligible [S2, S3].
+3. **Mandate Retroreflective Directional Coatings in Pedestrian Districts:** Commercial pedestrian corridors must adopt directional retroreflection coupled with urban foliage [S4].
+
+## Critical Literature Gaps
+A glaring omission in the current indexed literature [S1-S6] is the absence of multi-year albedo degradation studies in humid, tropical monsoon environments. Tire abrasion, dirt particulate adhesion, and biological moss colonization substantially diminish theoretical solar reflectance over 24-month cycles, representing a high-priority research gap before municipal capital budgets are deployed.</textarea>
+
+              <!-- Markdown Rendered Preview -->
+              <div id="notes-rendered-preview" class="notes-preview-pane hidden"></div>
+            </div>
+
+            <!-- Editor Word / Citation Counter Footer -->
+            <div class="editor-footer-status">
+              <span id="editor-word-count">318 words</span>
+              <span>•</span>
+              <span id="editor-citation-count">5 Citations [S1, S2, S3, S4, S5]</span>
+              <span>•</span>
+              <span class="md-support-label">Markdown Supported</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- BASE OF THE INTERFACE: Team Attribution        -->
+        <!-- ============================================== -->
+        <footer class="app-interface-base" id="app-base-credits" aria-label="Team Attribution">
+          <div class="interface-base-inner">
+            <div class="team-credits-badge">
+              <span class="base-pulse-dot"></span>
+              <span class="team-label">Desk Research Workspace</span>
+            </div>
+            <div class="team-members-row">
+              <div class="member-pill">
+                <svg class="member-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="member-name">Team Faith:</span>
+                <a href="tel:09060675905" class="member-phone" title="Call Team Faith">09060675905</a>
+              </div>
+              <span class="base-divider">•</span>
+              <div class="member-pill">
+                <svg class="member-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="member-name">Ayomide:</span>
+                <a href="tel:07048916400" class="member-phone" title="Call Ayomide">07048916400</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </main>
+    </div>
+
+    <!-- Mobile-First Sticky Bottom Navigation (<1200px) -->
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <div class="bottom-nav-inner">
+        <button type="button" class="bottom-nav-item active" data-tab="search" id="mobile-tab-search">
+          <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="bottom-label">Search</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="bottom-nav-item" data-tab="library" id="mobile-tab-library">
+          <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span class="bottom-label">Library</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="bottom-nav-item" data-tab="insights" id="mobile-tab-insights">
+          <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z">
+            </path>
+            <path
+              d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z">
+            </path>
+          </svg>
+          <span class="bottom-label">Insights</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="bottom-nav-item" data-tab="chat" id="mobile-tab-chat">
+          <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="bottom-label">Chat</span>
+          <span class="indicator-dot"></span>
+        </button>
+
+        <button type="button" class="bottom-nav-item" data-tab="notes" id="mobile-tab-notes">
+          <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          <span class="bottom-label">Notes</span>
+          <span class="indicator-dot"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Side Drawer (Slide-out for Source Full Preview on Mobile & Tablet) -->
+    <div id="source-drawer-backdrop" class="drawer-backdrop hidden"></div>
+    <aside id="source-drawer" class="source-drawer" aria-hidden="true" role="dialog"
+      aria-labelledby="drawer-source-title">
+      <div class="drawer-header">
+        <div class="drawer-badge-wrap">
+          <span class="badge-teal" id="drawer-badge">S1</span>
+          <span class="drawer-meta-date" id="drawer-date">2026</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawer-close-btn" aria-label="Close drawer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <h2 id="drawer-source-title" class="drawer-title">Source Title</h2>
+        <a id="drawer-source-url" href="#" target="_blank" rel="noopener noreferrer" class="drawer-url-link">
+          <span id="drawer-url-text">https://...</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Saved Content & Abstract</h3>
+          <div class="drawer-text-content" id="drawer-full-text">
+            Full source text will appear here...
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Extracted Evidence Claims</h3>
+          <ul class="drawer-claims-list" id="drawer-claims-list">
+            <!-- Populated via app.js -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button type="button" class="btn-secondary" id="drawer-btn-cite">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          <span>Cite in Notes</span>
+        </button>
+        <button type="button" class="btn-primary" id="drawer-btn-chat">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Ask in Chat</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Quote Verification Popover Modal -->
+    <div id="quote-modal-backdrop" class="modal-backdrop hidden"></div>
+    <div id="quote-verification-modal" class="quote-modal hidden" role="dialog" aria-modal="true"
+      aria-labelledby="modal-quote-title">
+      <div class="quote-modal-header">
+        <div class="modal-badge-group">
+          <span class="source-id-badge" id="modal-citation-key">S1</span>
+          <span class="verified-shield-badge">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Verified against source text</span>
+          </span>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-quote-modal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="quote-modal-body">
+        <h3 class="quote-modal-source-title" id="modal-source-title">Source Title</h3>
+        <div class="quote-box">
+          <span class="quote-mark">“</span>
+          <p class="exact-quote-text" id="modal-exact-quote">Verbatim quote will appear here...</p>
+        </div>
+        <div class="quote-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Source Type:</span>
+            <span class="meta-val" id="modal-source-type">Scholarly (Crossref)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Retrieval Date:</span>
+            <span class="meta-val" id="modal-retrieval-date">Oct 24, 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Confidence:</span>
+            <span class="meta-val" id="modal-confidence-val">Supported by 2+ sources</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Canonical Record:</span>
+            <a id="modal-source-link" href="#" target="_blank" rel="noopener noreferrer" class="meta-link">View
+              Canonical Link ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="quote-modal-footer">
+        <button type="button" class="btn-primary" id="modal-btn-open-source">Open Full Evidence in Drawer</button>
+      </div>
+    </div>
+
+    <!-- Team Contact Modal -->
+    <div id="team-modal-backdrop" class="modal-backdrop hidden"></div>
+    <div id="team-contact-modal" class="quote-modal hidden" role="dialog" aria-modal="true"
+      aria-labelledby="team-modal-title">
+      <div class="quote-modal-header">
+        <div class="modal-badge-group">
+          <span class="source-id-badge" style="background: var(--teal-600);">TEAM</span>
+          <h3 id="team-modal-title" style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Desk
+            Research Workspace Team</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-team-modal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="quote-modal-body">
+        <div class="team-contact-card">
+          <div class="team-card-head">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--teal-500)" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div>
+              <h4 style="font-size: 1rem; color: var(--text-primary);">Team Faith</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Research Lead & Literature Synthesis</p>
+            </div>
+          </div>
+          <div class="team-action-row">
+            <a href="tel:09060675905" class="btn-primary" style="flex: 1; text-align: center;">Call 09060675905</a>
+            <button type="button" class="btn-secondary btn-copy-num" data-phone="09060675905">Copy Number</button>
+          </div>
+        </div>
+
+        <div class="team-contact-card" style="margin-top: 14px;">
+          <div class="team-card-head">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--teal-500)" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div>
+              <h4 style="font-size: 1rem; color: var(--text-primary);">Ayomide</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Systems Architecture & Evidence Database</p>
+            </div>
+          </div>
+          <div class="team-action-row">
+            <a href="tel:07048916400" class="btn-primary" style="flex: 1; text-align: center;">Call 07048916400</a>
+            <button type="button" class="btn-secondary btn-copy-num" data-phone="07048916400">Copy Number</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side-by-Side Conflict Comparison Modal -->
+    <div id="conflict-modal-backdrop" class="modal-backdrop hidden"></div>
+    <div id="conflict-comparison-modal" class="quote-modal conflict-compare-modal hidden" role="dialog"
+      aria-modal="true" aria-labelledby="conflict-modal-title">
+      <div class="quote-modal-header">
+        <div class="modal-badge-group">
+          <span class="badge-status badge-red" style="font-size: 0.75rem;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>Empirical Contradiction Analysis</span>
+          </span>
+          <h3 id="conflict-modal-title" style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Source
+            S2 vs Source S4</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-conflict-modal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="quote-modal-body">
+        <div class="conflict-grid-2col">
+          <!-- Col 1: S2 -->
+          <div class="conflict-col col-s2">
+            <div class="conflict-col-header">
+              <span class="source-id-badge">S2</span>
+              <span class="conflict-col-tag">Diffuse Reflection (Harmful)</span>
+            </div>
+            <h4 class="conflict-paper-title">Santin et al. (2025)</h4>
+            <p class="conflict-journal">Building and Environment • doi:10.1016/j.buildenv.2025.111822</p>
+            <div class="conflict-quote-card">
+              <span class="quote-mark">“</span>
+              <p>Standard cylindrical human thermal modeling revealed an unintended increase of +3.2°C in daytime Mean
+                Radiant Temperature (MRT), correlating with heightened subjective physiological heat distress...</p>
+            </div>
+            <div class="conflict-metric-pill negative">
+              <span>+3.2°C Pedestrian MRT Penalty</span>
+            </div>
+          </div>
+
+          <!-- Col 2: S4 -->
+          <div class="conflict-col col-s4">
+            <div class="conflict-col-header">
+              <span class="source-id-badge" style="background: var(--teal-600);">S4</span>
+              <span class="conflict-col-tag"
+                style="background: var(--teal-tint); color: var(--teal-500); border-color: var(--teal-subtle-border);">Directional
+                Retroreflection (Solution)</span>
+            </div>
+            <h4 class="conflict-paper-title">Takahashi & Rossi (2025)</h4>
+            <p class="conflict-journal">Environmental Research Letters • doi:10.1088/1748-9326/ad29ef</p>
+            <div class="conflict-quote-card">
+              <span class="quote-mark">“</span>
+              <p>Unlike diffuse high-albedo coatings, retroreflective formulations return over 62% of reflected
+                shortwave energy back along the incoming solar vector... delivering net improvements of 2.8°C UTCI.</p>
+            </div>
+            <div class="conflict-metric-pill positive">
+              <span>-2.8°C UTCI Thermal Improvement</span>
+            </div>
+          </div>
+        </div>
+        <div class="conflict-reconciliation-box">
+          <strong>Synthesis Resolution:</strong> The contradiction is resolved by optical geometry. Diffuse cool
+          pavements scatter radiation into pedestrians at ground level, while retroreflective materials selectively
+          redirect rays upward toward space.
+        </div>
+      </div>
+      <div class="quote-modal-footer">
+        <button type="button" class="btn-primary" id="btn-insert-conflict-report">Insert Conflict Synthesis into
+          Report</button>
+      </div>
+    </div>
+
+    <!-- Citation Picker Popover Modal for Notes Editor -->
+    <div id="citation-picker-backdrop" class="modal-backdrop hidden"></div>
+    <div id="citation-picker-modal" class="quote-modal citation-picker-dialog hidden" role="dialog" aria-modal="true"
+      aria-labelledby="citation-picker-title">
+      <div class="quote-modal-header">
+        <h3 id="citation-picker-title" style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Insert
+          Citation from Evidence Vault</h3>
+        <button type="button" class="modal-close-btn" id="btn-close-citation-picker"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="quote-modal-body" style="padding: 12px 18px;">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Select a verified source below to
+          insert its ground-truth citation tag [S#] at your cursor position:</p>
+        <div class="citation-picker-list" id="citation-picker-list">
+          <!-- Populated dynamically from state.sources -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
